@@ -1,13 +1,13 @@
 package com.testtask.santa.core.data.repository
 
-interface CurdRepository<Model, in Id> {
+interface CurdRepository<Model> {
 
-    fun create(model: Model)
+    fun insertAll(entities: List<Model>)
 
-    fun update(model: Model)
+    fun deleteAll()
 
-    fun delete(model: Model)
+    fun findAll(): List<Model>
 
-    fun find(id: Id): List<Model>
+    fun count(): Int
 
 }

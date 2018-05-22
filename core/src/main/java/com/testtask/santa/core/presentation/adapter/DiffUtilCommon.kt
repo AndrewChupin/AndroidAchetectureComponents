@@ -2,7 +2,7 @@ package com.testtask.santa.core.presentation.adapter
 
 import android.support.v7.util.DiffUtil
 
-class CommonDiffUtill<Type>(
+class DiffUtilCommon<Type>(
         private val old: List<Type>,
         private val new: List<Type>
 ): DiffUtil.Callback() {

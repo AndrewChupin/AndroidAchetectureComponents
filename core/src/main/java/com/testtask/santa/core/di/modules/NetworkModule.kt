@@ -7,7 +7,6 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import com.testtask.santa.core.network.Api
 import javax.inject.Singleton
 
 
@@ -32,8 +31,5 @@ class NetworkModule {
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
 
-    @Singleton
-    @Provides
-    fun provideApi(retrofit: Retrofit) = retrofit.create(Api::class.java)
 
 }

@@ -32,3 +32,13 @@ dependencies {
     kapt deps.android.roomCompiler
     kapt deps.google.daggerProcessor
 }
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+
+kapt {
+    generateStubs = true
+}

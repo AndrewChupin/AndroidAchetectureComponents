@@ -47,6 +47,7 @@ dependencies {
 
     api deps.kotlin.stdlib
     api deps.kotlin.coroutines
+    api deps.kotlin.coroutinesAndroid
 
     api deps.google.dagger
     kapt deps.google.daggerProcessor
