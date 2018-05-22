@@ -10,7 +10,7 @@ import wizzard.bus.tutu.ru.posts.presentation.posts.contract.PostsFragment
 import wizzard.bus.tutu.ru.posts.presentation.posts.contract.PostsViewModel
 
 @PostsScope
-@Subcomponent(modules = [PostsComponent.PostsModule::class])
+@Subcomponent(modules = [PostsModule::class])
 interface PostsComponent {
 
     @Subcomponent.Builder
@@ -19,15 +19,16 @@ interface PostsComponent {
         fun build(): PostsComponent
     }
 
-    @Module
-    class PostsModule(private val fragment: Fragment) {
-
-        @PostsScope
-        @Provides
-        fun provideHell(): PostsContract = ViewModelProviders.of(fragment).get(PostsViewModel::class.java)
-
-    }
-
     fun inject(postsFragment: PostsFragment)
+
+}
+
+
+@Module
+class PostsModule(private val fragment: Fragment) {
+
+    @PostsScope
+    @Provides
+    fun provideHell(): PostsContract = ViewModelProviders.of(fragment).get(PostsViewModel::class.java)
 
 }

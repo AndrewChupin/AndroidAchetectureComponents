@@ -19,41 +19,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api deps.support.appCompat
-    api deps.support.recyclerView
-    api deps.support.cardView
-    api deps.support.support
-    api deps.support.designSupport
-    api deps.support.constraint
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(":core")
 
-    api deps.android.lifecycleExt
-    api deps.android.lifecycleCommon
-    api deps.android.roomRuntime
-    api deps.android.roomRx
-
-    api deps.kotlin.stdlib
-    api deps.kotlin.coroutines
-
-    api deps.reactivex.rxJava
-    api deps.reactivex.rxAndroid
-
-    api deps.google.dagger
+    kapt deps.android.roomCompiler
     kapt deps.google.daggerProcessor
-
-    api deps.square.picasso
-    api deps.square.okhttpDownloader
-
-    api deps.square.retrofit
-    api deps.square.okhttp
-    api deps.square.retrofitRxAdapter
-    api deps.square.moshiConverter
-    api deps.square.moshi
-    kapt deps.square.moshiGen
-
-    implementation deps.facebook.stetho
-    implementation deps.facebook.networkInterceptor
 }

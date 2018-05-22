@@ -1,8 +1,8 @@
 package wizzard.bus.tutu.ru.posts.app
 
 import android.app.Application
-import wizzard.bus.tutu.ru.posts.core.di.AppComponent
-import wizzard.bus.tutu.ru.posts.core.di.DaggerAppComponent
+import wizzard.bus.tutu.ru.posts.common.di.AppComponent
+import wizzard.bus.tutu.ru.posts.common.di.DaggerAppComponent
 
 class AppDelegate: Application() {
 
