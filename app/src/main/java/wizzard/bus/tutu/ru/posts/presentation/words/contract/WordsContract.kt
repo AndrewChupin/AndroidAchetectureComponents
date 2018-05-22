@@ -1,7 +1,7 @@
 package wizzard.bus.tutu.ru.posts.presentation.words.contract
 
 import android.arch.lifecycle.MutableLiveData
-import wizzard.bus.tutu.ru.posts.data.words.entity.Word
+import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 interface WordsContract {
 

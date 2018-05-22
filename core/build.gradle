@@ -15,7 +15,7 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"https://www.tutu.ru/\""
+        buildConfigField "String", "BASE_URL", "\"http://192.168.0.240:5000\""
     }
 
     buildTypes {

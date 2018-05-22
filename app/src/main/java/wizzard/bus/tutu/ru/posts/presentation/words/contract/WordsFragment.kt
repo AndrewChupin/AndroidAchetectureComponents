@@ -12,6 +12,7 @@ import wizzard.bus.tutu.ru.posts.R
 import com.testtask.santa.core.presentation.adapter.DiffUtilCommon
 import com.testtask.santa.core.presentation.view.BaseFragment
 import kotlinx.android.synthetic.main.fragments_words.*
+import kotlinx.coroutines.experimental.CompletableDeferred
 import wizzard.bus.tutu.ru.posts.list.words.WordsAdapter
 import wizzard.bus.tutu.ru.posts.presentation.words.di.WordsModule
 import wizzard.bus.tutu.ru.posts.utils.delegate
@@ -41,6 +42,7 @@ class WordsFragment: BaseFragment<WordsFragment>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         activity?.let {
             it.delegate().appComponent
                     .postsComponent()

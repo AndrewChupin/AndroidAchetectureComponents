@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import wizzard.bus.tutu.ru.posts.R
-import wizzard.bus.tutu.ru.posts.data.words.entity.Word
+import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 
 class WordsAdapter: RecyclerView.Adapter<WordViewHolder>() {

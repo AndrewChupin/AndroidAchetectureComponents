@@ -1,7 +1,7 @@
-package wizzard.bus.tutu.ru.posts.data.words.manager
+package wizzard.bus.tutu.ru.posts.data.word.manager
 
 import android.arch.persistence.room.*
-import wizzard.bus.tutu.ru.posts.data.words.entity.Word
+import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 @Dao
 interface WordDao {

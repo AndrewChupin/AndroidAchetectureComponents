@@ -3,7 +3,7 @@ package wizzard.bus.tutu.ru.posts.list.words
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import kotlinx.android.synthetic.main.item_word.view.*
-import wizzard.bus.tutu.ru.posts.data.words.entity.Word
+import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 class WordViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
