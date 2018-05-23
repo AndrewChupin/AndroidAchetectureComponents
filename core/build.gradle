@@ -15,7 +15,8 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "BASE_URL", "\"http://192.168.0.240:5000\""
+        buildConfigField "String", "BASE_URL", "\"http://192.168.65.141:5000\""
+        buildConfigField "String", "SHARED_NAME", "\"request_preference\""
     }
 
     buildTypes {

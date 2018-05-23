@@ -1,12 +1,8 @@
 package wizzard.bus.tutu.ru.posts.presentation.words.di
 
-import com.testtask.santa.core.data.mapper.BaseMapper
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
-import wizzard.bus.tutu.ru.posts.data.word.common.Word
-import wizzard.bus.tutu.ru.posts.data.word.common.WordDto
-import wizzard.bus.tutu.ru.posts.data.word.common.WordDtoToDomain
 import wizzard.bus.tutu.ru.posts.data.word.repository.WordRepository
 import wizzard.bus.tutu.ru.posts.data.word.repository.WordRepositoryRoom
 import wizzard.bus.tutu.ru.posts.data.word.service.WordService
@@ -33,10 +29,6 @@ interface WordsComponent {
 
 @Module
 class WordsModule {
-
-    @WordsScope
-    @Provides
-    fun provideWordDtoToDomain(): WordDtoToDomain = WordDtoToDomain()
 
     @WordsScope
     @Provides

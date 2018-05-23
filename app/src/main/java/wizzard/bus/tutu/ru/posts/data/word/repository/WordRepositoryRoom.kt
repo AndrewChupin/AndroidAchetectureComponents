@@ -9,7 +9,7 @@ class WordRepositoryRoom @Inject constructor(
 ): WordRepository {
 
     override fun insertAll(entities: List<Word>) {
-        appDatabase.postsDao().insert(entities)
+        appDatabase.postsDao().insertAll(entities)
     }
 
     override fun deleteAll() {

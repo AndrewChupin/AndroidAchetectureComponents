@@ -23,7 +23,7 @@ class WordsViewModel @Inject constructor(
 
     override fun updateData() {
         launch(UI) {
-            posts.value = postsInteractor.loadWords()
+            posts.value = postsInteractor.loadWords().await()
         }
     }
 

@@ -5,6 +5,6 @@ import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 interface WordsInteractor {
 
-    suspend fun loadWords(): List<Word>
+    suspend fun loadWords(): Deferred<List<Word>>
 
 }
