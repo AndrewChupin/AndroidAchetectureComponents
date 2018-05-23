@@ -1,7 +1,7 @@
 package wizzard.bus.tutu.ru.posts.presentation.words.contract
 
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import com.testtask.santa.core.presentation.viewmodel.BaseViewModel
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import wizzard.bus.tutu.ru.posts.data.word.common.Word
@@ -10,8 +10,8 @@ import javax.inject.Inject
 
 
 class WordsViewModel @Inject constructor(
-        val postsInteractor: WordsInteractor
-): ViewModel(), WordsContract {
+    private val postsInteractor: WordsInteractor
+): BaseViewModel(), WordsContract {
 
     companion object {
         private val TAG = WordsViewModel::class.java.name
@@ -23,7 +23,15 @@ class WordsViewModel @Inject constructor(
 
     override fun updateData() {
         launch(UI) {
-            posts.value = postsInteractor.loadWords().await()
+            try {
+                posts.value = postsInteractor.loadWords().await()
+            } catch (e: Exception) {
+                when(e) {
+                    // TODO
+                    is IllegalAccessError -> {}
+                    else -> {}
+                }
+            }
         }
     }
 

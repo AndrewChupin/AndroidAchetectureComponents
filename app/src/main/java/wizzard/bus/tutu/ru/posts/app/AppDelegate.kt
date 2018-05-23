@@ -18,9 +18,5 @@ class AppDelegate: Application() {
         component
     }
 
-    override fun onCreate() {
-        super.onCreate()
-    }
-
 }
 

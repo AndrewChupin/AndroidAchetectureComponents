@@ -1,4 +1,4 @@
-package com.testtask.santa.core.di.scopes
+package com.testtask.santa.core.di.qualifiers
 
 annotation class Remote
 

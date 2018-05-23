@@ -5,7 +5,7 @@ import wizzard.bus.tutu.ru.posts.data.word.common.Word
 import javax.inject.Inject
 
 class WordRepositoryRoom @Inject constructor(
-        val appDatabase: AppDatabase
+    private val appDatabase: AppDatabase
 ): WordRepository {
 
     override fun insertAll(entities: List<Word>) {

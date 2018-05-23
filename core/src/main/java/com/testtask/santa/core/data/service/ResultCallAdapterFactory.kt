@@ -1,10 +1,6 @@
 package com.testtask.santa.core.data.service
 
-
-import com.squareup.moshi.Json
 import com.squareup.moshi.Types
-import com.testtask.santa.core.data.Result
-import com.testtask.santa.core.data.ServerResponse
 import kotlinx.coroutines.experimental.CompletableDeferred
 import kotlinx.coroutines.experimental.Deferred
 import retrofit2.*

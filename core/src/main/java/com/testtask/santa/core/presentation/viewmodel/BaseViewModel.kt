@@ -1,5 +1,4 @@
 package com.testtask.santa.core.presentation.viewmodel
 
 
-class BaseViewModel {
-}
+open class BaseViewModel

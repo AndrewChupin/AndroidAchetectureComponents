@@ -1,33 +1,22 @@
 package wizzard.bus.tutu.ru.posts.presentation.words.contract
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.util.DiffUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import wizzard.bus.tutu.ru.posts.R
-import com.testtask.santa.core.presentation.adapter.DiffUtilCommon
+import com.testtask.santa.core.presentation.adapter.calculateDiffs
 import com.testtask.santa.core.presentation.view.BaseFragment
+import com.testtask.santa.core.presentation.view.ContractErrorDelegate
+import com.testtask.santa.core.presentation.viewmodel.Error
 import kotlinx.android.synthetic.main.fragments_words.*
-import kotlinx.coroutines.experimental.CompletableDeferred
+import wizzard.bus.tutu.ru.posts.R
 import wizzard.bus.tutu.ru.posts.list.words.WordsAdapter
 import wizzard.bus.tutu.ru.posts.presentation.words.di.WordsModule
 import wizzard.bus.tutu.ru.posts.utils.delegate
 import javax.inject.Inject
 
-class WordsFragment: BaseFragment<WordsFragment>() {
-
-    @Inject
-    lateinit var contractFactory: WordsViewModelFactory
-
-    private val postsContract: WordsContract by lazy {
-        ViewModelProviders.of(this, contractFactory).get(WordsViewModel::class.java)
-    }
-
-    private var postAdapter: WordsAdapter? = null
+class WordsFragment : BaseFragment<WordsContract>(), ContractErrorDelegate {
 
     companion object {
         private val TAG = WordsFragment::class.java.name
@@ -40,13 +29,18 @@ class WordsFragment: BaseFragment<WordsFragment>() {
         }
     }
 
+    @Inject
+    override lateinit var contract: WordsContract
+    var postAdapter: WordsAdapter? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         activity?.let {
             it.delegate().appComponent
                     .postsComponent()
-                    .module(WordsModule())
+                    .module(WordsModule(this))
                     .build()
                     .inject(this)
         }
@@ -57,8 +51,12 @@ class WordsFragment: BaseFragment<WordsFragment>() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        super.errorDelegate = this
+
         // Init adapter
         postAdapter = WordsAdapter()
+
 
         // Init recyclerView
         rv_posts.apply {
@@ -67,21 +65,23 @@ class WordsFragment: BaseFragment<WordsFragment>() {
         }
 
         // Subscribe data
-        postsContract.posts?.observeForever { posts ->
-            postAdapter?.let {
-                val diffResult = DiffUtil.calculateDiff(DiffUtilCommon(it.posts, posts!!), false)
-                it.updateData(posts)
-                diffResult.dispatchUpdatesTo(postAdapter)
+        contract.posts?.observeForever { newPosts ->
+            postAdapter?.apply {
+                if (newPosts != null) calculateDiffs(posts, newPosts)
             }
         }
 
         // LoadData
-        postsContract.updateData()
+        contract.updateData()
+    }
+
+    override fun onReceiveError(error: Error) {
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        postAdapter = null
+        this.postAdapter = null
     }
 
 }

@@ -1,4 +1,4 @@
-package wizzard.bus.tutu.ru.posts.data.word.manager
+package wizzard.bus.tutu.ru.posts.data.word.repository
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert

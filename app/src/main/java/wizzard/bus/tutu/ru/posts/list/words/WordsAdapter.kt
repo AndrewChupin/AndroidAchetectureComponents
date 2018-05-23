@@ -1,18 +1,18 @@
 package wizzard.bus.tutu.ru.posts.list.words
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.testtask.santa.core.presentation.view.BaseAdapter
 import wizzard.bus.tutu.ru.posts.R
 import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 
-class WordsAdapter: RecyclerView.Adapter<WordViewHolder>() {
+class WordsAdapter: BaseAdapter<Word, WordViewHolder>() {
 
     var posts: List<Word> = emptyList()
 
-    fun updateData(post: List<Word>) {
-        this.posts = post
+    override fun updateData(data: List<Word>) {
+        this.posts = data
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WordViewHolder {

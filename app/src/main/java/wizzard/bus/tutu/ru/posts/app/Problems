@@ -1,4 +1,3 @@
-Retrofit + Couroutines - write adapter
-Update DB
-saeled class Response
 actors
+Обработка result
+передача данных во ViewModel

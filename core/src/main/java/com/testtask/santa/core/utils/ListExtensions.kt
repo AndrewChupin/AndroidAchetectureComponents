@@ -1,6 +1,6 @@
 
 
-package wizzard.bus.tutu.ru.posts.utils
+package com.testtask.santa.core.utils
 
 import com.testtask.santa.core.data.mapper.Mappable
 

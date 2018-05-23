@@ -1,4 +1,4 @@
-package com.testtask.santa.core.data
+package com.testtask.santa.core.data.service
 
 import com.squareup.moshi.Json
 

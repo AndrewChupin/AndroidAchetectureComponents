@@ -1,5 +1,6 @@
 package wizzard.bus.tutu.ru.posts.presentation.words.di
 
+import android.arch.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
@@ -9,7 +10,9 @@ import wizzard.bus.tutu.ru.posts.data.word.service.WordService
 import wizzard.bus.tutu.ru.posts.data.word.service.WordServiceRetrofit
 import wizzard.bus.tutu.ru.posts.domain.interactor.posts.WordsInteractor
 import wizzard.bus.tutu.ru.posts.domain.interactor.posts.WordsInteractorDefault
+import wizzard.bus.tutu.ru.posts.presentation.words.contract.WordsContract
 import wizzard.bus.tutu.ru.posts.presentation.words.contract.WordsFragment
+import wizzard.bus.tutu.ru.posts.presentation.words.contract.WordsViewModel
 import wizzard.bus.tutu.ru.posts.presentation.words.contract.WordsViewModelFactory
 
 @WordsScope
@@ -28,7 +31,7 @@ interface WordsComponent {
 
 
 @Module
-class WordsModule {
+class WordsModule(private val fragment: WordsFragment) {
 
     @WordsScope
     @Provides
@@ -44,6 +47,11 @@ class WordsModule {
 
     @WordsScope
     @Provides
-    fun provideWordsContract(wordsInteractor: WordsInteractor): WordsViewModelFactory = WordsViewModelFactory(wordsInteractor)
+    fun provideWordsContractFactory(wordsInteractor: WordsInteractor): WordsViewModelFactory = WordsViewModelFactory(wordsInteractor)
+
+    @WordsScope
+    @Provides
+    fun provideWordsContract(contractFactory: WordsViewModelFactory): WordsContract =
+        ViewModelProviders.of(fragment, contractFactory).get(WordsViewModel::class.java)
 
 }
