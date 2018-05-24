@@ -45,10 +45,10 @@ class ResultCallAdapterFactory private constructor() : CallAdapter.Factory() {
 
     private class BodyCallAdapter<T>(
         private val responseType: Type
-    ) : CallAdapter<ServerResponse<T>, Deferred<Result<T>>> {
+    ) : CallAdapter<ServerResponse<T>, Deferred<ResponseResult<T>>> {
 
-        override fun adapt(call: Call<ServerResponse<T>>): Deferred<Result<T>> {
-            val deferred = CompletableDeferred<Result<T>>()
+        override fun adapt(call: Call<ServerResponse<T>>): Deferred<ResponseResult<T>> {
+            val deferred = CompletableDeferred<ResponseResult<T>>()
 
             deferred.invokeOnCompletion {
                 if (deferred.isCancelled) {
@@ -58,20 +58,20 @@ class ResultCallAdapterFactory private constructor() : CallAdapter.Factory() {
 
             call.enqueue(object : Callback<ServerResponse<T>> {
                 override fun onFailure(call: Call<ServerResponse<T>>, t: Throwable) {
-                    deferred.complete(Result.Exception(t))
+                    deferred.complete(ResponseResult.Exception(t))
                 }
 
                 override fun onResponse(call: Call<ServerResponse<T>>, response: Response<ServerResponse<T>>) {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             if (it.code > 0) {
-                                deferred.complete(Result.Error(it.code))
+                                deferred.complete(ResponseResult.Error(it.code))
                             } else {
-                                deferred.complete(Result.Success(it.data))
+                                deferred.complete(ResponseResult.Success(it.data))
                             }
                         }
                     } else {
-                        deferred.complete(Result.Exception(HttpException(response)))
+                        deferred.complete(ResponseResult.Exception(HttpException(response)))
                     }
                 }
             })
@@ -87,7 +87,7 @@ class ResultCallAdapterFactory private constructor() : CallAdapter.Factory() {
     ) : CallAdapter<ServerResponse<T>, Any> {
 
         override fun adapt(call: Call<ServerResponse<T>>): Any {
-            val deferred = CompletableDeferred<Result<Any>>()
+            val deferred = CompletableDeferred<ResponseResult<Any>>()
 
             deferred.invokeOnCompletion {
                 if (deferred.isCancelled) {
@@ -97,20 +97,20 @@ class ResultCallAdapterFactory private constructor() : CallAdapter.Factory() {
 
             call.enqueue(object : Callback<ServerResponse<T>> {
                 override fun onFailure(call: Call<ServerResponse<T>>, t: Throwable) {
-                    deferred.complete(Result.Exception(t))
+                    deferred.complete(ResponseResult.Exception(t))
                 }
 
                 override fun onResponse(call: Call<ServerResponse<T>>, response: Response<ServerResponse<T>>) {
                     if (response.isSuccessful) {
                         response.body()?.let {
                             if (it.code > 0) {
-                                deferred.complete(Result.Error(it.code))
+                                deferred.complete(ResponseResult.Error(it.code))
                             } else {
-                                deferred.complete(Result.Success(it.data))
+                                deferred.complete(ResponseResult.Success(it.data))
                             }
                         }
                     } else {
-                        deferred.complete(Result.Exception(HttpException(response)))
+                        deferred.complete(ResponseResult.Exception(HttpException(response)))
                     }
                 }
             })

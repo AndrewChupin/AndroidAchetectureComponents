@@ -1,5 +1,3 @@
-
-
 package com.testtask.santa.core.utils
 
 import com.testtask.santa.core.data.mapper.Mappable

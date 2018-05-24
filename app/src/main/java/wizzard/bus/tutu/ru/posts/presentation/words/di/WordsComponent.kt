@@ -4,6 +4,8 @@ import android.arch.lifecycle.ViewModelProviders
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
+import wizzard.bus.tutu.ru.posts.data.settings.SettingsRepository
+import wizzard.bus.tutu.ru.posts.data.settings.SettingsRepositoryPreference
 import wizzard.bus.tutu.ru.posts.data.word.repository.WordRepository
 import wizzard.bus.tutu.ru.posts.data.word.repository.WordRepositoryRoom
 import wizzard.bus.tutu.ru.posts.data.word.service.WordService
@@ -54,4 +56,8 @@ class WordsModule(private val fragment: WordsFragment) {
     fun provideWordsContract(contractFactory: WordsViewModelFactory): WordsContract =
         ViewModelProviders.of(fragment, contractFactory).get(WordsViewModel::class.java)
 
+    @WordsScope
+    @Provides
+    fun provideSettingsRepository(settingsRepositoryPreference: SettingsRepositoryPreference): SettingsRepository
+        = settingsRepositoryPreference
 }

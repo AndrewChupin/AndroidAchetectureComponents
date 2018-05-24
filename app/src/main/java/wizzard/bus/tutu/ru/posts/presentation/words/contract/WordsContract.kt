@@ -5,10 +5,7 @@ import com.testtask.santa.core.presentation.viewmodel.BaseContract
 import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 interface WordsContract: BaseContract {
-
-    val posts: MutableLiveData<List<Word>>?
-
+    val words: MutableLiveData<List<Word>>?
     fun updateData()
-
 }
 

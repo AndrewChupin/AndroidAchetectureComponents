@@ -17,23 +17,25 @@ class WordsViewModel @Inject constructor(
         private val TAG = WordsViewModel::class.java.name
     }
 
-    override val posts: MutableLiveData<List<Word>> by lazy {
+    override val words: MutableLiveData<List<Word>> by lazy {
         MutableLiveData<List<Word>>()
     }
 
-    override fun updateData() {
-        launch(UI) {
-            try {
-                posts.value = postsInteractor.loadWords().await()
-            } catch (e: Exception) {
-                when(e) {
-                    // TODO
-                    is IllegalAccessError -> {}
-                    else -> {}
-                }
-            }
+    override fun updateData() = launchUi {
+        try {
+            val wordsResult = postsInteractor.getWords()
+            words.value = wordsResult
+        } catch (e: Exception) {
+            super.error.value = e
+        } finally {
+            super.isLoading.value = false
         }
     }
 
+    private fun launchUi(block: suspend () -> Unit) {
+        launch(UI) {
+            block()
+        }
+    }
 }
 

@@ -1,21 +1,29 @@
 package com.testtask.santa.core.data.service
 
 import com.squareup.moshi.Json
+import com.testtask.santa.core.utils.exceptions.DataException
 
-sealed class Result<ResponseType> {
+sealed class ResponseResult<ResponseType> {
     data class Success<ResponseType>(
         @Json(name = "name")
         val data: ResponseType
-    ) : Result<ResponseType>()
+    ) : ResponseResult<ResponseType>()
 
     data class Error<ResponseType>(
         @Json(name = "code")
         val code: Long
-    ) : Result<ResponseType>()
+    ) : ResponseResult<ResponseType>()
 
     data class Exception<ResponseType>(
         val error: Throwable
-    ) : Result<ResponseType>()
+    ) : ResponseResult<ResponseType>()
+
+
+    fun handleDefault(): ResponseType = when(this) {
+        is ResponseResult.Success -> this.data
+        is ResponseResult.Error -> throw DataException(this.code)
+        is ResponseResult.Exception -> throw this.error
+    }
 }
 
 

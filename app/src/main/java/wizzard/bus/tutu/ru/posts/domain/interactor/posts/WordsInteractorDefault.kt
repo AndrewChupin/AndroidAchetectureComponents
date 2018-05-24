@@ -1,6 +1,6 @@
 package wizzard.bus.tutu.ru.posts.domain.interactor.posts
 
-import com.testtask.santa.core.data.service.Result
+import com.testtask.santa.core.data.service.ResponseResult
 import com.testtask.santa.core.utils.mapAll
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.async
@@ -17,25 +17,33 @@ class WordsInteractorDefault @Inject constructor(
         private val wordService: WordService
 ): WordsInteractor {
 
+    override suspend fun getWords(onSuccess: (List<Word>) -> Unit, onError: (Throwable) -> Unit) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override suspend fun loadWords(): Deferred<List<Word>> = async {
-        //if (wordRepository.count() > 0) wordRepository.findAll()
         val wordsDef = wordService.loadWords()
         val words = wordsDef.await()
-        val worldsToken = settingsRepository.wordsStateToken
-        when(words) {
-            is Result.Success -> {
+        when (words) {
+            is ResponseResult.Success -> {
                 val wordsDom = words.data.mapAll()
-                // wordRepository.insertAll(wordsDom)
-                // wordRepository.findAll()
                 wordsDom
             }
-            is Result.Error -> {
+            is ResponseResult.Error -> {
                 throw IllegalArgumentException("Error with code ${words.code}")
             }
-            is Result.Exception -> {
+            is ResponseResult.Exception -> {
                 throw words.error
             }
         }
     }
 
+    override suspend fun getWords(): List<Word> {
+        val deferred = async {
+            val deferred = wordService.loadWords()
+            deferred.await().handleDefault().mapAll()
+        }
+        return deferred.await()
+    }
 }
+
