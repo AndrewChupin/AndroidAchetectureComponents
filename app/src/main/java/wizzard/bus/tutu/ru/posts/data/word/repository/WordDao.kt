@@ -1,5 +1,6 @@
 package wizzard.bus.tutu.ru.posts.data.word.repository
 
+import android.arch.paging.DataSource
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
@@ -12,13 +13,16 @@ interface WordDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(post: List<Word>)
 
-    @Query("SELECT * FROM posts")
+    @Query("SELECT * FROM words")
     fun findAll(): List<Word>
 
-    @Query("DELETE FROM posts")
+    @Query("DELETE FROM words")
     fun deleteAll()
 
-    @Query("SELECT COUNT(*) FROM posts")
+    @Query("SELECT COUNT(*) FROM words")
     fun count(): Int
+
+    @Query("SELECT * FROM words")
+    fun wordsPaging(): DataSource.Factory<Int, Word>
 
 }

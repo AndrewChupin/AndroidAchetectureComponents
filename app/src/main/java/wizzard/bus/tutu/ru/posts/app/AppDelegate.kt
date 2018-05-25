@@ -1,6 +1,7 @@
 package wizzard.bus.tutu.ru.posts.app
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.testtask.santa.core.di.modules.AppModule
 import wizzard.bus.tutu.ru.posts.common.di.AppComponent
 import wizzard.bus.tutu.ru.posts.common.di.DaggerAppComponent
@@ -16,6 +17,11 @@ class AppDelegate: Application() {
 
         component.inject(this)
         component
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        Stetho.initializeWithDefaults(this)
     }
 
 }

@@ -1,5 +1,6 @@
 package wizzard.bus.tutu.ru.posts.data.word.repository
 
+import android.arch.paging.DataSource
 import wizzard.bus.tutu.ru.posts.app.AppDatabase
 import wizzard.bus.tutu.ru.posts.data.word.common.Word
 import javax.inject.Inject
@@ -7,6 +8,8 @@ import javax.inject.Inject
 class WordRepositoryRoom @Inject constructor(
     private val appDatabase: AppDatabase
 ): WordRepository {
+
+    override fun wordsPaging(): DataSource.Factory<Int, Word> = appDatabase.postsDao().wordsPaging()
 
     override fun insertAll(entities: List<Word>) {
         appDatabase.postsDao().insertAll(entities)

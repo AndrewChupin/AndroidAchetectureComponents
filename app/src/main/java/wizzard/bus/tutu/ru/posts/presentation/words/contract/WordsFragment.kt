@@ -1,10 +1,11 @@
 package wizzard.bus.tutu.ru.posts.presentation.words.contract
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
-import com.testtask.santa.core.presentation.adapter.calculateDiffs
 import com.testtask.santa.core.presentation.view.BaseFragment
 import kotlinx.android.synthetic.main.fragments_words.*
 import wizzard.bus.tutu.ru.posts.R
@@ -48,22 +49,32 @@ class WordsFragment: BaseFragment<WordsContract>() {
         // Init adapter
         postAdapter = WordsAdapter()
 
-
         // Init recyclerView
         rv_posts.apply {
             adapter = postAdapter
             layoutManager = LinearLayoutManager(context)
         }
 
-        // Subscribe data
-        contract.words?.observeForever { newPosts ->
-            postAdapter?.apply {
-                if (newPosts != null) calculateDiffs(posts, newPosts)
+        contract.wordsPagin?.observe(this, Observer { newPosts ->
+        postAdapter?.apply {
+            Log.d("Logos", "submitList fragment $newPosts")
+                if (newPosts != null) submitList(newPosts)
             }
-        }
+        })
+
+        // Subscribe data
+        contract.words?.observe(this, Observer { newPosts ->
+            /*postAdapter?.apply {
+                if (newPosts != null) calculateDiffs(posts, newPosts)
+            }*/
+            contract.bindToPage()
+            Log.d("Logos", "bindToPage fragment $newPosts")
+        })
 
         // LoadData
-        contract.updateData()
+        //contract.updateData()
+
+        contract.bindToPage()
     }
 
     override fun onDestroyView() {

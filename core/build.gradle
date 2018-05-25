@@ -38,13 +38,13 @@ dependencies {
     api deps.support.recyclerView
     api deps.support.cardView
     api deps.support.support
-    api deps.support.designSupport
     api deps.support.constraint
 
     api deps.android.lifecycleExt
     api deps.android.lifecycleCommon
     api deps.android.roomRuntime
     api deps.android.roomRx
+    api deps.android.paging
 
     api deps.kotlin.stdlib
     api deps.kotlin.coroutines

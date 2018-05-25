@@ -8,6 +8,7 @@ import kotlinx.coroutines.experimental.launch
 open class BaseViewModel: ViewModel(), SuspendExtensions
 
 interface SuspendExtensions {
+
     fun launchUi(block: suspend () -> Unit) {
         launch(UI) {
             block()

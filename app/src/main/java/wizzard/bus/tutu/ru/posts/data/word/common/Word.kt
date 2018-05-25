@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey
 import com.squareup.moshi.Json
 import com.testtask.santa.core.data.mapper.Mappable
 
-@Entity(tableName = "posts")
+@Entity(tableName = "words")
 data class Word(
     @PrimaryKey
     val id: Long,

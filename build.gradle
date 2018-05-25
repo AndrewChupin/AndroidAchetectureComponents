@@ -6,7 +6,7 @@ buildscript {
             'compileSdk'       : 27,
 
             'lifecycle_version': '1.1.1',
-            'buildTools'       : '27.0.2',
+            'buildTools'       : '27.1.0',
             'kotlin_version'   : '1.2.31',
             'androidPlugin'    : '3.1.0-alpha08',
             'kotlin'           : '1.2.20',
@@ -30,6 +30,7 @@ buildscript {
             'rxAndroid'        : '2.0.1',
             'stetho'           : '1.5.0',
             'junit'            : '4.12',
+            'pagingVersion'    : '1.0.0',
             'atsl'             : '1.0.1',
             'mockitoKotlin'    : '1.5.0',
             'robolectric'      : '3.6.1',
@@ -45,6 +46,7 @@ buildscript {
                     'roomRuntime'    : "android.arch.persistence.room:runtime:${versions.room}",
                     'roomCompiler'   : "android.arch.persistence.room:compiler:${versions.room}",
                     'roomRx'         : "android.arch.persistence.room:rxjava2:${versions.roomRx}",
+                    'paging'         : "android.arch.paging:runtime:${versions.pagingVersion}",
             ],
             support  : [
                     'appCompat'    : "com.android.support:appcompat-v7:${versions.buildTools}",

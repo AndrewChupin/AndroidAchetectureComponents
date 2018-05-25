@@ -29,6 +29,9 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(":core")
 
+    implementation deps.facebook.stetho
+    implementation deps.facebook.networkInterceptor
+
     kapt deps.android.roomCompiler
     kapt deps.google.daggerProcessor
 }
