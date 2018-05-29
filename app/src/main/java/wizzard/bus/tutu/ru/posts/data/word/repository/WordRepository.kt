@@ -9,4 +9,6 @@ interface WordRepository : CurdRepository<Word> {
 
     fun wordsPaging(): DataSource.Factory<Int, Word>
 
+    fun wordsRange(from: Int, size: Int): List<Word>
+
 }

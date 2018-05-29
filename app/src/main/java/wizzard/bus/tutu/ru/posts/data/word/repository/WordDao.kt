@@ -25,4 +25,7 @@ interface WordDao {
     @Query("SELECT * FROM words")
     fun wordsPaging(): DataSource.Factory<Int, Word>
 
+    @Query("SELECT * FROM words OFFSET :from LIMIT :size")
+    fun wordsPagingRange(from: Int, size: Int): List<Word>
+
 }

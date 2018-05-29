@@ -8,8 +8,7 @@ import wizzard.bus.tutu.ru.posts.data.word.common.Word
 
 interface WordsContract: BaseContract {
     val words: MutableLiveData<List<Word>>?
-    val wordsPagin: LiveData<PagedList<Word>>?
+    val wordsPaging: LiveData<PagedList<Word>>?
     fun updateData()
-    fun bindToPage()
 }
 

@@ -1,6 +1,5 @@
 package wizzard.bus.tutu.ru.posts.domain.interactor.posts
 
-import android.arch.paging.DataSource
 import com.testtask.santa.core.utils.mapAll
 import kotlinx.coroutines.experimental.async
 import wizzard.bus.tutu.ru.posts.data.settings.SettingsRepository
@@ -15,7 +14,6 @@ class WordsInteractorDefault @Inject constructor(
         private val settingsRepository: SettingsRepository,
         private val wordService: WordService
 ): WordsInteractor {
-
     override suspend fun getWords(): List<Word> = async {
         val deferred = wordService.loadWords()
         val words = deferred.await()
@@ -27,8 +25,8 @@ class WordsInteractorDefault @Inject constructor(
     }.await() // TODO Maybe deferred???
 
 
-    override suspend fun getWordsPaging(): DataSource.Factory<Int, Word> = async {
-        wordRepository.wordsPaging()
-    }.await() // TODO Maybe deferred???
+    override suspend fun getWordsRange(from: Int, size: Int): List<Word> = async {
+        wordRepository.wordsRange(from, size)
+    }.await()
 }
 

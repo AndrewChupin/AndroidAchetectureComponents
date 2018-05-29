@@ -19,6 +19,10 @@ class WordRepositoryRoom @Inject constructor(
         appDatabase.postsDao().deleteAll()
     }
 
+    override fun wordsRange(from: Int, size: Int): List<Word> {
+        return appDatabase.postsDao().wordsPagingRange(from, size)
+    }
+
     override fun findAll(): List<Word> = appDatabase.postsDao().findAll()
 
     override fun count(): Int = appDatabase.postsDao().count()

@@ -55,7 +55,7 @@ class WordsFragment: BaseFragment<WordsContract>() {
             layoutManager = LinearLayoutManager(context)
         }
 
-        contract.wordsPagin?.observe(this, Observer { newPosts ->
+        contract.wordsPaging?.observe(this, Observer { newPosts ->
         postAdapter?.apply {
             Log.d("Logos", "submitList fragment $newPosts")
                 if (newPosts != null) submitList(newPosts)
